@@ -6,48 +6,59 @@
 <link rel="manifest" href="manifest.json">
 <title>My MathMate</title>
 <style>
-html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;position:fixed;touch-action:manipulation;-webkit-text-size-adjust:100%;}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;position:fixed;touch-action:manipulation;}
 body{background:linear-gradient(135deg,#7c7cff 0%,#a18cd1 50%,#8b5cf6 100%);display:flex;justify-content:center;align-items:center;font-family:Poppins,sans-serif;}
-.card{background:#fff;width:90%;max-width:360px;padding:24px 20px;border-radius:22px;box-shadow:0 15px 40px rgba(0,0,0,0.25);transition:transform 0.38s cubic-bezier(0.34,1.56,0.64,1);}
-.card.up{transform:translateY(-140px);}
-h2{text-align:center;margin:0 0 18px 0;color:#5a189a;font-size:20px}
-input{width:100%;padding:13px 14px;border-radius:12px;border:2px solid #ddd;margin-bottom:12px;font-size:16px!important;font-weight:600;outline:none;background:#f9f9ff;}
-input.active{border-color:#ff70a6;background:#fff0f6;box-shadow:0 0 0 3px #ffc8dd;}
-.btns{display:flex;gap:8px;justify-content:center;margin:14px 0 5px 0}
-.btns button{border:none;padding:10px 16px;border-radius:11px;font-weight:bold;font-size:14px;color:#fff}
-.add{background:#22c55e}.sub{background:#f59e0b}.mul{background:#3b82f6}.div{background:#ec4899}
-#result{text-align:center;font-weight:800;margin-top:12px;font-size:19px;color:#5a189a;min-height:24px}
 
-/* INSTALL POPUP */
-#installBanner{
-  position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-150px);
-  width:90%;max-width:350px;background:#fff;border-radius:18px;
-  padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.3);
-  display:flex;align-items:center;gap:12px;z-index:9999;transition:0.5s cubic-bezier(0.34,1.56,0.64,1);
+.card{
+  background:#fff;width:88%;max-width:340px;
+  padding:22px 16px;border-radius:22px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.25);
+  transition:transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+  overflow:hidden;box-sizing:border-box;
 }
-#installBanner.show{transform:translateX(-50%) translateY(0);}
-#installBanner.logo{width:45px;height:45px;background:linear-gradient(135deg,#a18cd1,#ff70a6);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px}
-#installBanner.txt{flex:1}
-#installBanner.txt b{display:block;font-size:15px;color:#333}
-#installBanner.txt span{font-size:12px;color:#666}
-#installBanner button{border:none;padding:8px 14px;border-radius:10px;font-weight:bold;cursor:pointer}
-.btn-install{background:#5a189a;color:#fff}
-.btn-close{background:#f1f1f1;color:#333;margin-left:5px}
+.card.up{transform:translateY(-130px);}
+h2{text-align:center;margin:0 0 16px 0;color:#5a189a;font-size:20px}
 
-.cute-kb{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:28px 28px 0 0;padding:14px 10px calc(14px + env(safe-area-inset-bottom)) 10px;box-shadow:0 -10px 30px rgba(0,0,0,0.18);display:grid;grid-template-columns:repeat(3,1fr);gap:10px;transform:translateY(105%);transition:0.38s cubic-bezier(0.34,1.56,0.64,1);z-index:998;}
+input{
+  width:100%;max-width:100%;padding:13px 12px;border-radius:12px;border:2px solid #ddd;
+  margin-bottom:12px;font-size:16px!important;font-weight:600;outline:none;background:#f9f9ff;
+  box-sizing:border-box;display:block;transition:0.2s;
+}
+/* BLACK BORDER WHILE ENTERING - FIXED */
+input.active{
+  border-color:#000 !important;
+  background:#fff !important;
+  box-shadow:0 0 0 3px #d1d5db !important;
+}
+
+.btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px 0}
+.btns button{border:none;padding:10px 14px;border-radius:11px;font-weight:bold;font-size:13.5px;color:#fff}
+.add{background:#22c55e}.sub{background:#f59e0b}.mul{background:#3b82f6}.div{background:#ec4899}
+#result{text-align:center;font-weight:800;margin-top:12px;font-size:18px;color:#5a189a;min-height:20px}
+
+#installBanner{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-150px);width:90%;max-width:340px;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,0.3);display:flex;align-items:center;gap:10px;z-index:9999;transition:0.5s;}
+#installBanner.show{transform:translateX(-50%) translateY(0);}
+.logo{width:40px;height:40px;background:linear-gradient(135deg,#a18cd1,#ff70a6);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+.txt{flex:1}.txt b{font-size:14px}.txt span{font-size:11px;color:#666}
+#installBanner button{border:none;padding:7px 12px;border-radius:9px;font-weight:bold}
+.btn-install{background:#5a189a;color:#fff}.btn-close{background:#eee}
+
+/* GREY KEYBOARD - NEW */
+.cute-kb{position:fixed;bottom:0;left:0;right:0;background:#f8f8f8;border-radius:26px 26px 0 0;padding:12px 10px 18px 10px;box-shadow:0 -10px 30px rgba(0,0,0,0.18);display:grid;grid-template-columns:repeat(3,1fr);gap:9px;transform:translateY(105%);transition:0.38s;z-index:998;}
 .cute-kb.show{transform:translateY(0);}
-.cute-kb button{height:56px;border:none;border-radius:18px;font-size:24px;font-weight:800}
+.cute-kb button{height:54px;border:none;border-radius:16px;font-size:23px;font-weight:800;transition:0.1s}
 .cute-kb button:active{transform:scale(0.92);}
-.k-n{background:#ffb3d1;color:#fff;}.k-d{background:#a78bfa;color:#fff;}.k-c{background:#ffd6e0;color:#ff4d8a;}
-.k-ok{background:linear-gradient(135deg,#ff70a6,#ff9770);color:#fff;grid-column:span 3;height:50px;font-size:17px}
+.k-n{background:#e5e7eb;color:#111;border:1px solid #d1d5db;}
+.k-d{background:#9ca3af;color:#fff;}
+.k-c{background:#d1d5db;color:#111;}
+.k-ok{background:#111;color:#fff;grid-column:span 3;height:48px;font-size:16px}
 </style>
 </head>
 <body>
 
-<!-- AUTO INSTALL POPUP -->
 <div id="installBanner">
   <div class="logo">M</div>
-  <div class="txt"><b>My MathMate</b><span>Install app for fast use!</span></div>
+  <div class="txt"><b>My MathMate</b><br><span>Install app now!</span></div>
   <button class="btn-install" onclick="installApp()">Install</button>
   <button class="btn-close" onclick="hideBanner()">✕</button>
 </div>
@@ -74,30 +85,16 @@ input.active{border-color:#ff70a6;background:#fff0f6;box-shadow:0 0 0 3px #ffc8d
 </div>
 
 <script>
-let active='n1'; let kb=document.getElementById('kb'); let card=document.getElementById('card');
+let active='n1', kb=document.getElementById('kb'), card=document.getElementById('card');
 function openKB(id){active=id; kb.classList.add('show'); card.classList.add('up'); document.getElementById('n1').classList.toggle('active',id=='n1'); document.getElementById('n2').classList.toggle('active',id=='n2');}
 function closeKB(){kb.classList.remove('show'); card.classList.remove('up'); document.getElementById('n1').classList.remove('active'); document.getElementById('n2').classList.remove('active');}
 function tap(v){document.getElementById(active).value+=v;}
-function del(){let e=document.getElementById(active); e.value=e.value.slice(0,-1);}
-function doCalc(op){let a=parseFloat(document.getElementById('n1').value); let b=parseFloat(document.getElementById('n2').value); let rD=document.getElementById('result'); if(isNaN(a)||isNaN(b)){rD.innerText='Enter both di!';return;} let r=0; if(op=='+') r=a+b; if(op=='-') r=a-b; if(op=='*') r=a*b; if(op=='/') r=b!=0?a/b:'No / 0'; rD.innerText='Result: '+r; closeKB();}
-
-// INSTALL LOGIC - AUTO POPUP
-let deferredPrompt;
-const banner=document.getElementById('installBanner');
-window.addEventListener('beforeinstallprompt', (e)=>{
-  e.preventDefault(); deferredPrompt=e;
-  // Show banner after 1.5 sec as soon as open link
-  setTimeout(()=>{ banner.classList.add('show'); },1500);
-});
-function installApp(){
-  if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; hideBanner(); }); }
-  else{ alert('To install: Click 3 dots > Install app / Add to Home Screen'); }
-}
-function hideBanner(){ banner.classList.remove('show'); }
-// If already installed, don't show
-window.addEventListener('appinstalled', ()=>{ hideBanner(); console.log('Installed!'); });
-
-document.addEventListener('touchstart', function(e){ if(e.touches.length>1) e.preventDefault(); },{passive:false});
+function del(){document.getElementById(active).value=document.getElementById(active).value.slice(0,-1);}
+function doCalc(op){let a=parseFloat(document.getElementById('n1').value), b=parseFloat(document.getElementById('n2').value), rD=document.getElementById('result'); if(isNaN(a)||isNaN(b)){rD.innerText='Enter both di!';return;} let r=0; if(op=='+') r=a+b; if(op=='-') r=a-b; if(op=='*') r=a*b; if(op=='/') r=b!=0?a/b:'No /0'; rD.innerText='Result: '+r; closeKB();}
+let deferredPrompt; const banner=document.getElementById('installBanner');
+window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredPrompt=e; setTimeout(()=>banner.classList.add('show'),1500); });
+function installApp(){ if(deferredPrompt){deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{deferredPrompt=null; hideBanner();});} else alert('3 dots > Install app');}
+function hideBanner(){banner.classList.remove('show');}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
