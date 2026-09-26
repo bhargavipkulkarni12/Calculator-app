@@ -4,75 +4,123 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ffffff">
-<title>Calculator</title>
+<title>My Colourful Calculator</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-body{background:#f2f2f7;display:flex;justify-content:center;align-items:center;min-height:100dvh}
-.calc{width:100%;max-width:390px;height:100dvh;background:#fff;display:flex;flex-direction:column}
-@media(min-width:420px){.calc{height:88dvh;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,0.15);overflow:hidden}}
-.display-area{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 24px;background:#fff}
-#history{color:#8e8e93;font-size:20px;text-align:right;min-height:24px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-#display{font-size:56px;font-weight:200;text-align:right;color:#000;word-break:break-all;line-height:1.1;max-height:40vh;overflow-y:auto}
-.keypad{background:#f2f2f7;padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-button{height:68px;border:none;border-radius:14px;font-size:28px;font-weight:400;background:#fff;color:#000;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-button:active{transform:scale(0.95);background:#e5e5ea}
-.op{color:#ff9500;background:#fff}
-.eq{background:#ff9500;color:#fff}
-.clear{color:#ff3b30}
-.func{color:#000;background:#d1d1d6}
+*{box-sizing:border-box;font-family:Poppins,sans-serif}
+body{margin:0;background: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);min-height:100dvh;display:flex;justify-content:center;padding:20px 20px 220px 20px;}
+.card{
+  background:#f0fdf4;width:100%;max-width:360px;
+  padding:25px 20px;border-radius:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+  margin-top:5vh;transition:0.4s;
+}
+.card.up{margin-top:1vh;transform:translateY(-30px);}
+h2{text-align:center;margin:0 0 20px 0;font-size:20px}
+input{
+  width:100%;padding:14px;border-radius:12px;border:2px solid #000;
+  margin-bottom:15px;font-size:18px;font-weight:bold;outline:none;
+  background:white;
+}
+input.active{border-color:#ec4899;box-shadow:0 0 0 3px #fbc2eb;background:#fff0f6;}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}
+.btns button{border:none;padding:10px 18px;border-radius:12px;font-weight:bold;font-size:15px;color:white;cursor:pointer}
+.add{background:#22c55e}.sub{background:#eab308;color:#000}.mul{background:#3b82f6}.div{background:#ec4899}
+#result{text-align:center;font-weight:bold;margin-top:15px;font-size:20px;color:#5a189a;min-height:28px}
+
+/* OUR CUTE COLOURFUL KEYBOARD */
+.cute-keyboard{
+  position:fixed;bottom:0;left:0;right:0;
+  background:white;border-radius:30px 30px 0 0;
+  padding:15px 12px 20px 12px;
+  box-shadow:0 -10px 30px rgba(0,0,0,0.15);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  transform:translateY(100%);transition:0.35s ease;
+  z-index:100;
+}
+.cute-keyboard.show{transform:translateY(0);}
+.cute-keyboard button{
+  height:56px;border:none;border-radius:18px;
+  font-size:24px;font-weight:bold;transition:0.1s;
+}
+.cute-keyboard button:active{transform:scale(0.92);}
+.k-num{background:#ffafcc;color:white;}
+.k-op{background:#c8b6ff;color:white;}
+.k-del{background:#ffc8dd;color:#ff5d8f;}
+.k-next{background:#ff70a6;color:white;grid-column:span 2;}
 </style>
 </head>
 <body>
-<div class="calc">
-<div class="display-area">
-<div id="history"></div>
-<div id="display">0</div>
+<div class="card" id="card">
+  <h2>✨ My MathMate ✨</h2>
+  <input type="text" id="n1" readonly placeholder="Enter first number - tap me" onclick="openKB('n1')">
+  <input type="text" id="n2" readonly placeholder="Enter second number" onclick="openKB('n2')">
+  <div class="btns">
+    <button class="add" onclick="calc('+')">Add +</button>
+    <button class="sub" onclick="calc('-')">Sub -</button>
+    <button class="mul" onclick="calc('*')">Mul ×</button>
+    <button class="div" onclick="calc('/')">Div ÷</button>
+  </div>
+  <div id="result">Result will show here</div>
 </div>
-<div class="keypad">
-<button class="clear" onclick="clearAll()">AC</button>
-<button class="func" onclick="add('(')">(</button>
-<button class="func" onclick="add(')')">)</button>
-<button class="op" onclick="add('/')">÷</button>
 
-<button onclick="add('7')">7</button>
-<button onclick="add('8')">8</button>
-<button onclick="add('9')">9</button>
-<button class="op" onclick="add('*')">×</button>
-
-<button onclick="add('4')">4</button>
-<button onclick="add('5')">5</button>
-<button onclick="add('6')">6</button>
-<button class="op" onclick="add('-')">−</button>
-
-<button onclick="add('1')">1</button>
-<button onclick="add('2')">2</button>
-<button onclick="add('3')">3</button>
-<button class="op" onclick="add('+')">+</button>
-
-<button onclick="add('0')">0</button>
-<button onclick="add('.')">.</button>
-<button onclick="del()">⌫</button>
-<button class="eq" onclick="calc()">=</button>
+<div class="cute-keyboard" id="keyboard">
+  <button class="k-num" onclick="typeNum('1')">1</button>
+  <button class="k-num" onclick="typeNum('2')">2</button>
+  <button class="k-num" onclick="typeNum('3')">3</button>
+  <button class="k-num" onclick="typeNum('4')">4</button>
+  <button class="k-num" onclick="typeNum('5')">5</button>
+  <button class="k-num" onclick="typeNum('6')">6</button>
+  <button class="k-num" onclick="typeNum('7')">7</button>
+  <button class="k-num" onclick="typeNum('8')">8</button>
+  <button class="k-num" onclick="typeNum('9')">9</button>
+  <button class="k-op" onclick="typeNum('.')">.</button>
+  <button class="k-num" onclick="typeNum('0')">0</button>
+  <button class="k-del" onclick="delNum()">⌫</button>
+  <button class="k-op" onclick="switchInput()">⇅ Next</button>
+  <button class="k-next" onclick="closeKB()">Done ✓</button>
 </div>
-</div>
+
 <script>
-let d=document.getElementById('display');
-let h=document.getElementById('history');
-function add(v){
-if(d.innerText=='0' && v!='.' && v!=')' && v!='(' && v!='0') d.innerText='';
-if(d.innerText=='0' && !isNaN(v)) d.innerText=v;
-else if(d.innerText=='0' && v=='.') d.innerText='0.';
-else if(d.innerText!='0' || v=='.' || v=='(' || v==')') { if(d.innerText=='0' && v!='.') d.innerText=''; d.innerText+=v; }
-if(d.innerText=='') d.innerText='0';
-d.scrollTop=d.scrollHeight;
+let activeInput='n1';
+let n1=document.getElementById('n1');
+let n2=document.getElementById('n2');
+let kb=document.getElementById('keyboard');
+let card=document.getElementById('card');
+
+function openKB(id){
+  activeInput=id;
+  kb.classList.add('show');
+  card.classList.add('up');
+  document.getElementById(id).classList.add('active');
+  if(id=='n1') n2.classList.remove('active'); else n1.classList.remove('active');
+  setTimeout(()=>{ card.scrollIntoView({behavior:'smooth', block:'start'}); },100);
 }
-function clearAll(){d.innerText='0';h.innerText='';}
-function del(){d.innerText=d.innerText.slice(0,-1)||'0';}
-function calc(){
-try{h.innerText=d.innerText+' =';let res=eval(d.innerText);d.innerText=res;h.scrollLeft=h.scrollWidth;}
-catch{d.innerText='Error';}
-d.scrollTop=d.scrollHeight;
+function closeKB(){
+  kb.classList.remove('show');
+  card.classList.remove('up');
+  n1.classList.remove('active'); n2.classList.remove('active');
+}
+function typeNum(v){
+  let el=document.getElementById(activeInput);
+  el.value+=v;
+  el.scrollLeft=el.scrollWidth;
+}
+function delNum(){
+  let el=document.getElementById(activeInput);
+  el.value=el.value.slice(0,-1);
+}
+function switchInput(){
+  activeInput = activeInput=='n1' ? 'n2' : 'n1';
+  openKB(activeInput);
+}
+function calc(op){
+  let a=parseFloat(n1.value); let b=parseFloat(n2.value);
+  let resDiv=document.getElementById('result');
+  if(isNaN(a)||isNaN(b)){resDiv.innerText='Enter both numbers di!';return;}
+  let r=0;
+  if(op=='+') r=a+b; if(op=='-') r=a-b; if(op=='*') r=a*b; if(op=='/') r=b!=0?a/b:'Cannot / 0';
+  resDiv.innerText='Result: '+r;
+  closeKB();
 }
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
