@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Colourful Calculator</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#5b8def,#7dd3c8);font-family:Arial}
+.box{background:#eafff5;padding:25px;border-radius:15px;width:320px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,0.2)}
+input{width:90%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
+button{padding:8px 15px;margin:5px;border:none;border-radius:8px;color:white;cursor:pointer}
+.add{background:#2ecc71} .sub{background:#f1c40f;color:black} .mul{background:#3498db} .div{background:#e84393}
+#res{margin-top:15px;font-weight:bold;font-size:18px;color:#333}
+</style>
+</head>
+<body>
+<div class="box">
+<h3>✨ My Colourful Calculator ✨</h3>
+<input id="n1" type="number" placeholder="Enter first number">
+<input id="n2" type="number" placeholder="Enter second number"><br>
+<button class="add" onclick="calc('add')">Add +</button>
+<button class="sub" onclick="calc('sub')">Sub -</button>
+<button class="mul" onclick="calc('mul')">Mul ×</button>
+<button class="div" onclick="calc('div')">Div ÷</button>
+<div id="res">Result will show here</div>
+<p style="font-size:12px;color:#888;margin-top:15px">Made by Bhargavi</p>
+</div>
+<script>
+function calc(op){
+ let a=parseFloat(document.getElementById('n1').value);
+ let b=parseFloat(document.getElementById('n2').value);
+ let r=document.getElementById('res');
+ if(isNaN(a)||isNaN(b)){r.innerText='Enter both numbers';return}
+ if(op=='add') r.innerText='Result: '+(a+b);
+ if(op=='sub') r.innerText='Result: '+(a-b);
+ if(op=='mul') r.innerText='Result: '+(a*b);
+ if(op=='div') r.innerText=b==0?'Cannot divide by 0':'Result: '+(a/b);
+}
+</script>
+</body>
+</html>
