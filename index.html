@@ -1,114 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="manifest" href="manifest.json">
-<title>My Cute Calculator</title>
+<meta name="theme-color" content="#ffffff">
+<title>Calculator</title>
 <style>
-* { box-sizing:border-box; }
-body{
-  margin:0;
-  background: linear-gradient(180deg, #fde2e4 0%, #c8b6ff 100%);
-  height:100dvh;
-  display:flex;
-  justify-content:center;
-  font-family:Poppins, sans-serif;
-  overflow:hidden;
-}
-.calc{
-  width:100%;
-  max-width:360px;
-  height:100dvh;
-  background:white;
-  display:flex;
-  flex-direction:column;
-  border-radius:0;
-}
-@media(min-width:400px){
- .calc{ height:90dvh; margin-top:5dvh; border-radius:35px; box-shadow:0 15px 40px rgba(0,0,0,0.2); }
-}
-.top-area{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:25px;
-  background: linear-gradient(180deg, #fff 0%, #f9f2ff 100%);
-}
-.display{
-  font-size:42px;
-  font-weight:800;
-  color:#5a189a;
-  text-align:right;
-  word-wrap:break-word;
-  max-height:40vh;
-  overflow-y:auto;
-  overflow-x:hidden;
-  transition:0.3s;
-  line-height:1.2;
-}
-.hint{ color:#ffb3c6; font-size:14px; text-align:right; margin-bottom:10px; }
-
-.keys{
-  background:#fff;
-  border-radius:35px 35px 0 0;
-  padding:18px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  box-shadow:0 -5px 30px rgba(0,0,0,0.08);
-}
-button{
-  height:62px; border:none; border-radius:18px;
-  font-size:24px; font-weight:bold;
-  transition:0.1s;
-}
-button:active{ transform:scale(0.92); }
-.num{ background:#ffafcc; color:white; }
-.op{ background:#e0aaff; color:white; }
-.eq{ background:#ff70a6; color:white; grid-column:span 2; }
-.clear{ background:#ffc8dd; color:#ff5d8f; }
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{background:#f2f2f7;display:flex;justify-content:center;align-items:center;min-height:100dvh}
+.calc{width:100%;max-width:390px;height:100dvh;background:#fff;display:flex;flex-direction:column}
+@media(min-width:420px){.calc{height:88dvh;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,0.15);overflow:hidden}}
+.display-area{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 24px;background:#fff}
+#history{color:#8e8e93;font-size:20px;text-align:right;min-height:24px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#display{font-size:56px;font-weight:200;text-align:right;color:#000;word-break:break-all;line-height:1.1;max-height:40vh;overflow-y:auto}
+.keypad{background:#f2f2f7;padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+button{height:68px;border:none;border-radius:14px;font-size:28px;font-weight:400;background:#fff;color:#000;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+button:active{transform:scale(0.95);background:#e5e5ea}
+.op{color:#ff9500;background:#fff}
+.eq{background:#ff9500;color:#fff}
+.clear{color:#ff3b30}
+.func{color:#000;background:#d1d1d6}
 </style>
 </head>
 <body>
 <div class="calc">
-  <div class="top-area">
-    <div class="hint">My Calculator </div>
-    <div class="display" id="display">0</div>
-  </div>
-  <div class="keys">
-    <button class="clear" onclick="clearAll()">AC</button>
-    <button class="clear" onclick="del()">⌫</button>
-    <button class="op" onclick="add('%')">%</button>
-    <button class="op" onclick="add('/')">÷</button>
-    <button class="num" onclick="add('7')">7</button>
-    <button class="num" onclick="add('8')">8</button>
-    <button class="num" onclick="add('9')">9</button>
-    <button class="op" onclick="add('*')">×</button>
-    <button class="num" onclick="add('4')">4</button>
-    <button class="num" onclick="add('5')">5</button>
-    <button class="num" onclick="add('6')">6</button>
-    <button class="op" onclick="add('-')">−</button>
-    <button class="num" onclick="add('1')">1</button>
-    <button class="num" onclick="add('2')">2</button>
-    <button class="num" onclick="add('3')">3</button>
-    <button class="op" onclick="add('+')">+</button>
-    <button class="num" onclick="add('0')">0</button>
-    <button class="num" onclick="add('.')">.</button>
-    <button class="eq" onclick="calc()">=</button>
-  </div>
+<div class="display-area">
+<div id="history"></div>
+<div id="display">0</div>
+</div>
+<div class="keypad">
+<button class="clear" onclick="clearAll()">AC</button>
+<button class="func" onclick="add('(')">(</button>
+<button class="func" onclick="add(')')">)</button>
+<button class="op" onclick="add('/')">÷</button>
+
+<button onclick="add('7')">7</button>
+<button onclick="add('8')">8</button>
+<button onclick="add('9')">9</button>
+<button class="op" onclick="add('*')">×</button>
+
+<button onclick="add('4')">4</button>
+<button onclick="add('5')">5</button>
+<button onclick="add('6')">6</button>
+<button class="op" onclick="add('-')">−</button>
+
+<button onclick="add('1')">1</button>
+<button onclick="add('2')">2</button>
+<button onclick="add('3')">3</button>
+<button class="op" onclick="add('+')">+</button>
+
+<button onclick="add('0')">0</button>
+<button onclick="add('.')">.</button>
+<button onclick="del()">⌫</button>
+<button class="eq" onclick="calc()">=</button>
+</div>
 </div>
 <script>
 let d=document.getElementById('display');
+let h=document.getElementById('history');
 function add(v){
- if(d.innerText=='0' && v!='.') d.innerText='';
- d.innerText+=v;
- d.scrollTop = d.scrollHeight; // page goes UP auto
+if(d.innerText=='0' && v!='.' && v!=')' && v!='(' && v!='0') d.innerText='';
+if(d.innerText=='0' && !isNaN(v)) d.innerText=v;
+else if(d.innerText=='0' && v=='.') d.innerText='0.';
+else if(d.innerText!='0' || v=='.' || v=='(' || v==')') { if(d.innerText=='0' && v!='.') d.innerText=''; d.innerText+=v; }
+if(d.innerText=='') d.innerText='0';
+d.scrollTop=d.scrollHeight;
 }
-function clearAll(){ d.innerText='0'; }
-function del(){ d.innerText=d.innerText.slice(0,-1)||'0'; }
-function calc(){ try{ d.innerText=eval(d.innerText); d.scrollTop=d.scrollHeight; }catch{ d.innerText='Error'; } }
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js'); }
+function clearAll(){d.innerText='0';h.innerText='';}
+function del(){d.innerText=d.innerText.slice(0,-1)||'0';}
+function calc(){
+try{h.innerText=d.innerText+' =';let res=eval(d.innerText);d.innerText=res;h.scrollLeft=h.scrollWidth;}
+catch{d.innerText='Error';}
+d.scrollTop=d.scrollHeight;
+}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
 </html>
