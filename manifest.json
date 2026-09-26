@@ -6,7 +6,7 @@
   "background_color": "#ffffff",
   "theme_color": "#667eea",
   "icons": [{
-    "src": "https://www.pinterest.com/pin/cute-pink-bunny-calculator--914862420521577/",
+    "src": "icon.png",
     "sizes": "512x512",
     "type": "image/png"
   }]
