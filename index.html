@@ -4,123 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="manifest" href="manifest.json">
-<title>My Colourful Calculator</title>
+<title>✨My MathMate✨</title>
 <style>
 *{box-sizing:border-box;font-family:Poppins,sans-serif}
-body{margin:0;background: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);min-height:100dvh;display:flex;justify-content:center;padding:20px 20px 220px 20px;}
+body{
+  margin:0;
+  background: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);
+  min-height:100dvh;
+  display:flex;justify-content:center;
+  padding:15px 15px 240px 15px;
+}
 .card{
-  background:#f0fdf4;width:100%;max-width:360px;
+  background:#f0fdf4;width:100%;max-width:370px;
   padding:25px 20px;border-radius:25px;
   box-shadow:0 15px 35px rgba(0,0,0,0.2);
-  margin-top:5vh;transition:0.4s;
+  margin-top:4vh;transition:0.4s ease;
 }
-.card.up{margin-top:1vh;transform:translateY(-30px);}
-h2{text-align:center;margin:0 0 20px 0;font-size:20px}
+.card.up{margin-top:0vh;transform:translateY(-15px);}
+h2{text-align:center;margin:0 0 20px 0;color:#5a189a;font-size:22px}
 input{
-  width:100%;padding:14px;border-radius:12px;border:2px solid #000;
-  margin-bottom:15px;font-size:18px;font-weight:bold;outline:none;
-  background:white;
+  width:100%;padding:15px;border-radius:14px;border:2.5px solid #000;
+  margin-bottom:14px;font-size:17px;font-weight:bold;outline:none;background:#fff;
 }
-input.active{border-color:#ec4899;box-shadow:0 0 0 3px #fbc2eb;background:#fff0f6;}
-.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}
-.btns button{border:none;padding:10px 18px;border-radius:12px;font-weight:bold;font-size:15px;color:white;cursor:pointer}
+input.active{border-color:#ff70a6;box-shadow:0 0 0 4px #ffc8dd;background:#fff0f6;}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0}
+.btns button{border:none;padding:11px 20px;border-radius:14px;font-weight:bold;font-size:15px;color:#fff;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,0.15)}
 .add{background:#22c55e}.sub{background:#eab308;color:#000}.mul{background:#3b82f6}.div{background:#ec4899}
-#result{text-align:center;font-weight:bold;margin-top:15px;font-size:20px;color:#5a189a;min-height:28px}
+#result{text-align:center;font-weight:bold;margin-top:16px;font-size:21px;color:#5a189a;min-height:26px}
 
-/* OUR CUTE COLOURFUL KEYBOARD */
-.cute-keyboard{
+/* CUTE COLOURFUL KEYBOARD - PURPLE PINK */
+.cute-kb{
   position:fixed;bottom:0;left:0;right:0;
-  background:white;border-radius:30px 30px 0 0;
-  padding:15px 12px 20px 12px;
-  box-shadow:0 -10px 30px rgba(0,0,0,0.15);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-  transform:translateY(100%);transition:0.35s ease;
-  z-index:100;
+  background:#ffffff;border-radius:32px 32px 0 0;
+  padding:16px 12px 22px 12px;
+  box-shadow:0 -12px 35px rgba(0,0,0,0.18);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:11px;
+  transform:translateY(100%);transition:0.38s cubic-bezier(0.34,1.56,0.64,1);
+  z-index:999;
 }
-.cute-keyboard.show{transform:translateY(0);}
-.cute-keyboard button{
-  height:56px;border:none;border-radius:18px;
-  font-size:24px;font-weight:bold;transition:0.1s;
+.cute-kb.show{transform:translateY(0);}
+.cute-kb button{
+  height:58px;border:none;border-radius:20px;
+  font-size:25px;font-weight:800;transition:0.1s;
 }
-.cute-keyboard button:active{transform:scale(0.92);}
-.k-num{background:#ffafcc;color:white;}
-.k-op{background:#c8b6ff;color:white;}
-.k-del{background:#ffc8dd;color:#ff5d8f;}
-.k-next{background:#ff70a6;color:white;grid-column:span 2;}
+.cute-kb button:active{transform:scale(0.90);}
+.k-n{background:#ffafcc;color:#fff;}
+.k-d{background:#a18cd1;color:#fff;}
+.k-c{background:#ffc8dd;color:#ff4d8a;}
+.k-ok{background: linear-gradient(135deg,#ff70a6,#ff9770);color:white;grid-column:span 3;height:52px;font-size:18px;border-radius:16px;}
 </style>
 </head>
 <body>
 <div class="card" id="card">
   <h2>✨ My MathMate ✨</h2>
-  <input type="text" id="n1" readonly placeholder="Enter first number - tap me" onclick="openKB('n1')">
-  <input type="text" id="n2" readonly placeholder="Enter second number" onclick="openKB('n2')">
+  <input type="text" id="n1" readonly placeholder="Tap - Enter first number" onclick="openKB('n1')">
+  <input type="text" id="n2" readonly placeholder="Tap - Enter second number" onclick="openKB('n2')">
   <div class="btns">
-    <button class="add" onclick="calc('+')">Add +</button>
-    <button class="sub" onclick="calc('-')">Sub -</button>
-    <button class="mul" onclick="calc('*')">Mul ×</button>
-    <button class="div" onclick="calc('/')">Div ÷</button>
+    <button class="add" onclick="doCalc('+')">Add +</button>
+    <button class="sub" onclick="doCalc('-')">Sub -</button>
+    <button class="mul" onclick="doCalc('*')">Mul ×</button>
+    <button class="div" onclick="doCalc('/')">Div ÷</button>
   </div>
   <div id="result">Result will show here</div>
 </div>
 
-<div class="cute-keyboard" id="keyboard">
-  <button class="k-num" onclick="typeNum('1')">1</button>
-  <button class="k-num" onclick="typeNum('2')">2</button>
-  <button class="k-num" onclick="typeNum('3')">3</button>
-  <button class="k-num" onclick="typeNum('4')">4</button>
-  <button class="k-num" onclick="typeNum('5')">5</button>
-  <button class="k-num" onclick="typeNum('6')">6</button>
-  <button class="k-num" onclick="typeNum('7')">7</button>
-  <button class="k-num" onclick="typeNum('8')">8</button>
-  <button class="k-num" onclick="typeNum('9')">9</button>
-  <button class="k-op" onclick="typeNum('.')">.</button>
-  <button class="k-num" onclick="typeNum('0')">0</button>
-  <button class="k-del" onclick="delNum()">⌫</button>
-  <button class="k-op" onclick="switchInput()">⇅ Next</button>
-  <button class="k-next" onclick="closeKB()">Done ✓</button>
+<div class="cute-kb" id="kb">
+  <button class="k-n" onclick="tap('1')">1</button>
+  <button class="k-n" onclick="tap('2')">2</button>
+  <button class="k-n" onclick="tap('3')">3</button>
+  <button class="k-n" onclick="tap('4')">4</button>
+  <button class="k-n" onclick="tap('5')">5</button>
+  <button class="k-n" onclick="tap('6')">6</button>
+  <button class="k-n" onclick="tap('7')">7</button>
+  <button class="k-n" onclick="tap('8')">8</button>
+  <button class="k-n" onclick="tap('9')">9</button>
+  <button class="k-d" onclick="tap('.')">.</button>
+  <button class="k-n" onclick="tap('0')">0</button>
+  <button class="k-c" onclick="del()">⌫</button>
+  <button class="k-ok" onclick="closeKB()">Done ✓ - Show Result</button>
 </div>
 
 <script>
-let activeInput='n1';
-let n1=document.getElementById('n1');
-let n2=document.getElementById('n2');
-let kb=document.getElementById('keyboard');
+let active='n1';
+let kb=document.getElementById('kb');
 let card=document.getElementById('card');
-
 function openKB(id){
-  activeInput=id;
+  active=id;
   kb.classList.add('show');
   card.classList.add('up');
-  document.getElementById(id).classList.add('active');
-  if(id=='n1') n2.classList.remove('active'); else n1.classList.remove('active');
-  setTimeout(()=>{ card.scrollIntoView({behavior:'smooth', block:'start'}); },100);
+  document.getElementById('n1').classList.toggle('active', id=='n1');
+  document.getElementById('n2').classList.toggle('active', id=='n2');
+  // SCREEN GOES UP - Visible numbers!
+  setTimeout(()=>{window.scrollTo({top:0, behavior:'smooth'}); card.scrollIntoView({behavior:'smooth', block:'start'});},150);
 }
 function closeKB(){
   kb.classList.remove('show');
   card.classList.remove('up');
-  n1.classList.remove('active'); n2.classList.remove('active');
+  document.getElementById('n1').classList.remove('active');
+  document.getElementById('n2').classList.remove('active');
 }
-function typeNum(v){
-  let el=document.getElementById(activeInput);
-  el.value+=v;
-  el.scrollLeft=el.scrollWidth;
-}
-function delNum(){
-  let el=document.getElementById(activeInput);
-  el.value=el.value.slice(0,-1);
-}
-function switchInput(){
-  activeInput = activeInput=='n1' ? 'n2' : 'n1';
-  openKB(activeInput);
-}
-function calc(op){
-  let a=parseFloat(n1.value); let b=parseFloat(n2.value);
-  let resDiv=document.getElementById('result');
-  if(isNaN(a)||isNaN(b)){resDiv.innerText='Enter both numbers di!';return;}
-  let r=0;
-  if(op=='+') r=a+b; if(op=='-') r=a-b; if(op=='*') r=a*b; if(op=='/') r=b!=0?a/b:'Cannot / 0';
-  resDiv.innerText='Result: '+r;
+function tap(v){ document.getElementById(active).value += v; }
+function del(){ let el=document.getElementById(active); el.value=el.value.slice(0,-1); }
+function doCalc(op){
+  let a=parseFloat(document.getElementById('n1').value);
+  let b=parseFloat(document.getElementById('n2').value);
+  let rDiv=document.getElementById('result');
+  if(isNaN(a)||isNaN(b)){rDiv.innerText='Enter both numbers di!'; return;}
+  let r=0; if(op=='+') r=a+b; if(op=='-') r=a-b; if(op=='*') r=a*b; if(op=='/') r=b!=0?a/b:'Cannot / 0';
+  rDiv.innerText='Result: '+r;
   closeKB();
+  // Show result clearly after typing
+  setTimeout(()=>{rDiv.scrollIntoView({behavior:'smooth', block:'center'});},200);
 }
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
