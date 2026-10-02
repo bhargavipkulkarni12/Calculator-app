@@ -1,10 +1,12 @@
-# Student Management System - Spring Boot CRUD API
+# Calculator App - HTML, CSS, JavaScript
 
-**Tech Stack:** Java, Spring Boot, MySQL, Spring Data JPA, REST API, Postman
+**Tech Stack:** HTML, CSS, JavaScript
 
 **Features:**
-- CRUD operations - Add, View, Update, Delete student
-- MySQL database connection using JPA
-- Tested APIs in Postman
+- Basic calculation - Addition, Subtraction, Multiplication, Division
+- Responsive design for mobile and desktop
+- Clean UI
+
+**Live Demo:** [Add your GitHub Pages link after you enable Pages]
 
 **Author:** Bhargavi P Kulkarni
