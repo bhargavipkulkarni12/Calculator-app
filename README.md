@@ -7,6 +7,6 @@
 - Responsive design for mobile and desktop
 - Clean UI
 
-**Live Demo:** [Add your GitHub Pages link after you enable Pages]
+**Live Demo:**https://bhargavipkulkarni12.github.io/Calculator-app/
 
 **Author:** Bhargavi P Kulkarni
